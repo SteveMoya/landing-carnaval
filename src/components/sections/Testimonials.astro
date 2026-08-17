@@ -1,0 +1,47 @@
+---
+import { testimonials } from '../../data/testimonials';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<Section id="opiniones" ariaLabelledBy="testimonials-title" background="paper">
+  <div class="mb-16 text-center">
+    <p class="mb-3 font-accent text-xs uppercase tracking-[0.3em] text-pink">Opiniones</p>
+    <h2
+      id="testimonials-title"
+      class="font-display text-5xl uppercase leading-[0.95] tracking-tight text-black sm:text-6xl"
+    >
+      Los que ya <span class="text-blue">vivieron el caos</span>
+    </h2>
+  </div>
+
+  <ul class="grid gap-8 md:grid-cols-3">
+    {
+      testimonials.map((testimonial, index) => (
+        <li data-reveal style={`--reveal-delay:${index * 90}ms`}>
+          <Card tone="paper" rotate={index % 2 === 0 ? -1.2 : 1.2} class="flex h-full flex-col hover:shadow-yellow">
+            <div class="flex gap-1 text-pink" role="img" aria-label="Valoración: 5 de 5 estrellas">
+              {Array.from({ length: 5 }).map(() => <Icon name="star" size={14} />)}
+            </div>
+            <blockquote class="mt-4 flex-1 font-body text-[15px] leading-relaxed text-black/85">
+              “{testimonial.quote}”
+            </blockquote>
+            <figcaption class="mt-6 flex items-center gap-3 border-t-2 border-black/15 pt-4">
+              <span
+                class="flex h-10 w-10 shrink-0 items-center justify-center border-2 border-black bg-yellow font-accent text-xs text-black"
+                aria-hidden="true"
+              >
+                {testimonial.initials}
+              </span>
+              <div>
+                <p class="font-body text-sm font-bold text-black">{testimonial.name}</p>
+                <p class="font-body text-xs text-black/60">{testimonial.role}</p>
+              </div>
+            </figcaption>
+          </Card>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

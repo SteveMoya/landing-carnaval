@@ -1,0 +1,22 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<a
+  href="/"
+  aria-label="Carnaval Digital — inicio"
+  class:list={['group inline-flex items-baseline gap-2', className]}
+>
+  <span class="font-display text-2xl uppercase leading-none tracking-tight text-paper transition-colors duration-200 group-hover:text-yellow">
+    Carnaval<span class="text-pink">!</span>
+  </span>
+  <span
+    class="inline-block -rotate-6 border-2 border-black bg-yellow px-1.5 py-0.5 font-accent text-[9px] uppercase leading-none text-black shadow-black transition-transform duration-200 group-hover:rotate-0"
+  >
+    digital
+  </span>
+</a>

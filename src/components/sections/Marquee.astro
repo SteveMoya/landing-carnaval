@@ -1,0 +1,26 @@
+---
+import { site } from '../../data/site';
+---
+
+<div class="relative overflow-hidden border-y-4 border-black bg-yellow py-3">
+  <div class="flex w-max animate-marquee gap-10 whitespace-nowrap">
+    {[0, 1].map((_, i) => (
+      <div class="flex shrink-0 items-center gap-10" aria-hidden={i > 0 ? 'true' : undefined}>
+        {
+          site.marquee.map((word) => (
+            <span class="flex items-center gap-10 font-display text-xl uppercase tracking-wide text-black">
+              {word}
+              <span class="text-pink" aria-hidden="true">✦</span>
+            </span>
+          ))
+        }
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+import { process } from '../../data/process';
+import Section from '../ui/Section.astro';
+import Sticker from '../ui/Sticker.astro';
+---
+
+<Section id="proceso" ariaLabelledBy="process-title">
+  <div class="mb-16 text-center">
+    <Sticker tone="pink" rotate={-2} class="mb-6">Cómo lo hacemos</Sticker>
+    <h2
+      id="process-title"
+      class="font-display text-5xl uppercase leading-[0.95] tracking-tight sm:text-6xl"
+    >
+      Del briefing al <span class="text-blue">éxtasis</span>
+    </h2>
+  </div>
+
+  <ol class="relative grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+    <!-- línea conectora (desktop) -->
+    <div
+      aria-hidden="true"
+      class="absolute left-0 right-0 top-7 hidden h-1 border-t-2 border-dashed border-paper/30 lg:block"
+    ></div>
+
+    {
+      process.map((step, index) => (
+        <li data-reveal style={`--reveal-delay:${index * 90}ms`} class="relative">
+          <div class="relative z-10 inline-flex h-14 w-14 items-center justify-center border-2 border-black font-accent text-lg text-black shadow-black" class:list={[
+            step.tone === 'pink' && 'bg-pink',
+            step.tone === 'yellow' && 'bg-yellow',
+            step.tone === 'blue' && 'bg-blue',
+            step.tone === 'gold' && 'bg-gold',
+          ]}>
+            {step.number}
+          </div>
+          <h3 class="mt-5 font-display text-xl uppercase tracking-tight">{step.title}</h3>
+          <p class="mt-2 max-w-xs font-body text-sm leading-relaxed text-paper/70">
+            {step.description}
+          </p>
+        </li>
+      ))
+    }
+  </ol>
+</Section>

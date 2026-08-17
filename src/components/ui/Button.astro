@@ -1,0 +1,68 @@
+---
+export type ButtonVariant = 'primary' | 'ghost' | 'link';
+export type ButtonSize = 'sm' | 'md' | 'lg';
+
+interface Props {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  ariaLabel?: string;
+  target?: string;
+  rel?: string;
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  ariaLabel,
+  target,
+  rel,
+  class: className,
+} = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-2 rounded-none border-2 border-black font-accent uppercase tracking-wide transition-all duration-200 ease-out focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-yellow disabled:pointer-events-none disabled:opacity-40 active:translate-x-[3px] active:translate-y-[3px] active:shadow-none';
+
+const variants: Record<ButtonVariant, string> = {
+  primary:
+    'bg-yellow text-black shadow-pink hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_var(--color-pink)] hover:rotate-[-1deg]',
+  ghost:
+    'bg-transparent text-paper border-paper hover:bg-paper hover:text-black hover:shadow-pink',
+  link: 'px-0 text-yellow underline-offset-4 hover:underline',
+};
+
+const sizes: Record<ButtonSize, string> = {
+  sm: 'px-4 py-2 text-xs',
+  md: 'px-6 py-3 text-sm',
+  lg: 'px-8 py-4 text-base',
+};
+
+const sizeClass = variant === 'link' ? '' : sizes[size];
+
+const classes = [base, variants[variant], sizeClass, className].filter(Boolean).join(' ');
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class={classes}
+      aria-label={ariaLabel}
+      aria-disabled={disabled || undefined}
+      target={target}
+      rel={rel}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} aria-label={ariaLabel} disabled={disabled}>
+      <slot />
+    </button>
+  )
+}

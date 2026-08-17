@@ -1,0 +1,82 @@
+---
+import { site } from '../../data/site';
+import Button from '../ui/Button.astro';
+import Sticker from '../ui/Sticker.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="noise relative flex min-h-[92svh] flex-col justify-center overflow-hidden bg-black">
+  <!-- Canvas Three.js (partículas) -->
+  <canvas
+    data-hero-canvas
+    class="pointer-events-none absolute inset-0 h-full w-full"
+    aria-hidden="true"
+  ></canvas>
+
+  <!-- Brillo ambiental -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0">
+    <div class="absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-pink/20 blur-[120px]"></div>
+    <div class="absolute -right-24 top-1/3 h-72 w-72 rounded-full bg-blue/20 blur-[120px]"></div>
+  </div>
+
+  <!-- Stickers flotantes -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 hidden md:block">
+    {
+      site.hero.stickers.map((sticker) => (
+        <div
+          class="absolute"
+          style={`top:${sticker.top};${sticker.left ? `left:${sticker.left};` : ''}${sticker.right ? `right:${sticker.right};` : ''}`}
+        >
+          <Sticker tone={sticker.tone} rotate={sticker.tilt} class="animate-float">
+            {sticker.text}
+          </Sticker>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="container-carnaval relative py-28 text-center">
+    <p class="mb-6 font-accent text-xs uppercase tracking-[0.3em] text-yellow">
+      {site.hero.kicker}
+    </p>
+
+    <h1 class="mx-auto max-w-5xl font-display text-[13vw] uppercase leading-[0.95] tracking-tight text-paper sm:text-7xl md:text-8xl lg:text-9xl">
+      {site.hero.title.start}{' '}
+      <span class="relative inline-block -rotate-1 text-pink">
+        {site.hero.title.accent}
+        <span aria-hidden="true" class="absolute -right-3 -top-3 hidden rotate-6 border-2 border-black bg-yellow px-1.5 py-0.5 font-accent text-xs text-black shadow-black sm:inline-block">
+          ¡SIEMPRE!
+        </span>
+      </span>
+    </h1>
+
+    <p class="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-paper/80">
+      {site.hero.subtitle}
+    </p>
+
+    <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <Button href={`mailto:${site.email}`} size="lg" data-sound>
+        {site.hero.primaryCta}
+        <Icon name="zap" size={16} />
+      </Button>
+      <Button href="#trabajo" variant="ghost" size="lg" data-sound>
+        {site.hero.secondaryCta}
+        <Icon name="arrow-right" size={16} />
+      </Button>
+    </div>
+  </div>
+
+  <a
+    href="#servicios"
+    class="absolute bottom-6 left-1/2 -translate-x-1/2 font-accent text-[11px] uppercase tracking-widest text-paper/50 transition-colors hover:text-yellow"
+    aria-label="Bajar a servicios"
+  >
+    ▼ scroll
+  </a>
+</section>
+
+<script>
+  import { initHeroParticles } from '../../scripts/hero-particles';
+
+  initHeroParticles();
+</script>

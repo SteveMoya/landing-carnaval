@@ -1,0 +1,64 @@
+---
+import { pricing } from '../../data/pricing';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import Sticker from '../ui/Sticker.astro';
+---
+
+<Section id="precios" ariaLabelledBy="pricing-title">
+  <div class="mb-16 text-center">
+    <Sticker tone="yellow" rotate={2} class="mb-6">Inversión</Sticker>
+    <h2
+      id="pricing-title"
+      class="font-display text-5xl uppercase leading-[0.95] tracking-tight sm:text-6xl"
+    >
+      Precios sin <span class="text-gold">letra pequeña</span>
+    </h2>
+    <p class="mx-auto mt-4 max-w-xl font-body text-paper/70">
+      Cada evento es un mundo. Estos rangos son el punto de partida; la propuesta final se hace a medida.
+    </p>
+  </div>
+
+  <div class="grid gap-10 lg:grid-cols-3">
+    {
+      pricing.map((tier, index) => (
+        <Card
+          data-reveal
+          tone={tier.tone}
+          rotate={index === 1 ? 0 : index % 2 === 0 ? -1 : 1}
+          class:list={[
+            'flex flex-col',
+            tier.featured ? 'relative -translate-y-3 lg:scale-[1.04]' : '',
+          ]}
+        >
+          {tier.featured && (
+            <Sticker tone="pink" rotate={-4} class="absolute -top-4 left-6">Más elegido</Sticker>
+          )}
+          <h3 class="font-display text-3xl uppercase tracking-tight">{tier.name}</h3>
+          <p class="mt-1 font-body text-sm opacity-75">{tier.description}</p>
+          <p class="mt-6 font-display text-3xl uppercase tracking-tight">{tier.price}</p>
+          <ul class="mt-6 flex-1 space-y-3">
+            {
+              tier.features.map((feature) => (
+                <li class="flex items-start gap-3 font-body text-sm">
+                  <Icon name="check" size={16} class="mt-0.5 shrink-0" />
+                  {feature}
+                </li>
+              ))
+            }
+          </ul>
+          <Button
+            href={`mailto:hola@carnaval.digital?subject=${encodeURIComponent(`Propuesta ${tier.name}`)}`}
+            variant={tier.featured ? 'primary' : 'ghost'}
+            class="mt-8 w-full"
+            data-sound
+          >
+            {tier.cta}
+          </Button>
+        </Card>
+      ))
+    }
+  </div>
+</Section>

@@ -1,0 +1,36 @@
+---
+import { stats } from '../../data/stats';
+import Section from '../ui/Section.astro';
+---
+
+<Section id="stats" ariaLabelledBy="stats-title" background="paper">
+  <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      stats.map((stat, index) => (
+        <div
+          data-reveal
+          style={`--reveal-delay:${index * 80}ms`}
+          class="relative border-2 border-black bg-paper p-8 text-center shadow-[6px_6px_0_var(--color-pink)]"
+        >
+          <p
+            class="font-display text-6xl uppercase tracking-tight text-black"
+            data-stat={stat.value}
+            data-prefix={stat.prefix ?? ''}
+            data-suffix={stat.suffix ?? ''}
+          >
+            {stat.prefix}{stat.value}{stat.suffix}
+          </p>
+          <p class="mt-2 font-accent text-xs uppercase tracking-widest text-black/70">
+            {stat.label}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+</Section>
+
+<script>
+  import { initStats } from '../../scripts/stats';
+
+  initStats();
+</script>

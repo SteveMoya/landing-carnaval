@@ -1,0 +1,25 @@
+---
+import type { Tone } from '../../data/gallery';
+
+interface Props {
+  class?: string;
+  tone?: Tone;
+  rotate?: number;
+}
+
+const { class: className, tone = 'yellow', rotate = 0 } = Astro.props;
+
+const tones: Record<Tone, string> = {
+  pink: 'bg-pink text-black shadow-pink',
+  yellow: 'bg-yellow text-black shadow-yellow',
+  blue: 'bg-blue text-black shadow-blue',
+  gold: 'bg-gold text-black shadow-gold',
+};
+---
+
+<div
+  class:list={['inline-flex items-center justify-center border-2 border-black px-3 py-1 font-accent text-[11px] uppercase leading-none tracking-wide', tones[tone], className]}
+  style={rotate ? `transform: rotate(${rotate}deg)` : undefined}
+>
+  <slot />
+</div>

@@ -1,0 +1,80 @@
+---
+import { site } from '../../data/site';
+import Logo from '../brand/Logo.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<footer class="noise relative border-t-4 border-pink bg-black">
+  <div class="container-carnaval py-16">
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+      <div class="flex flex-col gap-5">
+        <Logo />
+        <p class="max-w-xs font-body text-sm leading-relaxed text-paper/80">
+          {site.description}
+        </p>
+        <div class="flex gap-3">
+          {
+            site.socials.map((s) => (
+              <a
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.name}
+                class="inline-flex h-10 w-10 items-center justify-center border-2 border-paper/40 text-paper transition-colors duration-200 hover:border-yellow hover:text-yellow"
+              >
+                <Icon name={s.icon} size={18} />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <nav aria-label="Explorar">
+        <h3 class="mb-4 font-accent text-xs uppercase tracking-widest text-yellow">Explorar</h3>
+        <ul class="space-y-3">
+          {
+            site.nav.map((item) => (
+              <li>
+                <a href={item.href} class="font-body text-sm text-paper/80 transition-colors hover:text-pink">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="flex flex-col gap-4">
+        <h3 class="font-accent text-xs uppercase tracking-widest text-yellow">Contacto</h3>
+        <a
+          href={`mailto:${site.email}`}
+          class="inline-flex items-center gap-2 font-body text-sm text-paper/80 transition-colors hover:text-pink"
+        >
+          <Icon name="mail" size={16} class="text-pink" />
+          {site.email}
+        </a>
+        <p class="max-w-[220px] font-body text-xs leading-relaxed text-paper/60">
+          Respondemos en menos de 24 horas. Lunes a sábado.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="mb-4 font-accent text-xs uppercase tracking-widest text-yellow">Gritar alto</h3>
+        <a
+          href={`mailto:${site.email}`}
+          class="inline-block -rotate-2 border-2 border-black bg-pink px-4 py-2 font-accent text-sm uppercase text-black shadow-pink transition-transform duration-200 hover:rotate-0"
+        >
+          Pedir propuesta
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-14 flex flex-col items-center justify-between gap-4 border-t-2 border-paper/15 pt-8 font-body text-xs text-paper/60 sm:flex-row">
+      <p>© {new Date().getFullYear()} {site.name}. Todos los derechos reservados.</p>
+      <div class="flex gap-6">
+        <a href={site.legal.privacy} class="transition-colors hover:text-yellow">Aviso de privacidad</a>
+        <a href={site.legal.terms} class="transition-colors hover:text-yellow">Términos</a>
+      </div>
+    </div>
+  </div>
+</footer>

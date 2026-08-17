@@ -1,0 +1,35 @@
+---
+import type { Tone } from '../../data/gallery';
+
+interface Props {
+  class?: string;
+  padded?: boolean;
+  tone?: Tone | 'paper' | 'black';
+  rotate?: number;
+  as?: 'article' | 'div' | 'li';
+}
+
+const { padded = true, tone = 'paper', rotate = 0, as: Tag = 'div', class: className }: Props = Astro.props;
+
+// Card collage: papel + borde duro + sombra offset de color + rotación sutil
+const toneStyles: Record<string, string> = {
+  paper: 'bg-paper text-black shadow-black',
+  pink: 'bg-pink text-black shadow-black',
+  yellow: 'bg-yellow text-black shadow-black',
+  blue: 'bg-blue text-black shadow-black',
+  gold: 'bg-gold text-black shadow-black',
+  black: 'bg-black text-paper shadow-pink',
+};
+---
+
+<Tag
+  class:list={[
+    'relative border-2 border-black transition-transform duration-300 ease-out hover:rotate-0',
+    toneStyles[tone],
+    padded && 'p-7',
+    className,
+  ]}
+  style={rotate ? `--tilt:${rotate}deg;transform:rotate(${rotate}deg)` : undefined}
+>
+  <slot />
+</Tag>

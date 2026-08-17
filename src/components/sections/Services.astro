@@ -1,0 +1,39 @@
+---
+import { services } from '../../data/services';
+import Section from '../ui/Section.astro';
+import Card from '../ui/Card.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<Section id="servicios" ariaLabelledBy="services-title">
+  <div class="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+    <div>
+      <p class="mb-3 font-accent text-xs uppercase tracking-[0.3em] text-pink">Qué hacemos</p>
+      <h2
+        id="services-title"
+        class="font-display text-5xl uppercase leading-[0.95] tracking-tight sm:text-6xl"
+      >
+        Servicios que <span class="text-yellow">gritan</span>
+      </h2>
+    </div>
+    <p class="max-w-md font-body text-paper/70">
+      Seis disciplinas, un mismo objetivo: que nadie se vaya igual que llegó.
+    </p>
+  </div>
+
+  <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      services.map((service, index) => (
+        <li data-reveal style={`--reveal-delay:${(index % 3) * 80}ms`}>
+          <Card tone={service.tone} rotate={(index % 2 === 0 ? -1 : 1) * (index % 3)} class="h-full hover:-rotate-1 hover:shadow-pink">
+            <span class="inline-flex h-12 w-12 items-center justify-center border-2 border-black bg-black text-yellow">
+              <Icon name={service.icon} size={22} />
+            </span>
+            <h3 class="mt-5 font-display text-2xl uppercase tracking-tight">{service.title}</h3>
+            <p class="mt-2 font-body text-sm leading-relaxed opacity-80">{service.description}</p>
+          </Card>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

@@ -1,0 +1,22 @@
+---
+import { site } from '../../data/site';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<nav class:list={['items-center gap-7', className]} aria-label="Navegación principal">
+  {
+    site.nav.map((item) => (
+      <a
+        href={item.href}
+        class="font-accent text-[13px] uppercase tracking-wide text-paper/90 transition-colors duration-200 hover:text-yellow"
+      >
+        {item.label}
+      </a>
+    ))
+  }
+</nav>
