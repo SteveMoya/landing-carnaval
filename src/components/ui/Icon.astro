@@ -26,10 +26,9 @@ interface Props {
   class?: string;
   strokeWidth?: number;
   label?: string;
-  hidden?: boolean;
 }
 
-const { name, size = 24, class: className, strokeWidth = 2, label, hidden = false } = Astro.props;
+const { name, size = 24, class: className, strokeWidth = 2, label } = Astro.props;
 
 interface IconDef {
   d: string[];
@@ -129,7 +128,6 @@ const { d, filled = false } = icons[name];
   role={label ? 'img' : undefined}
   aria-label={label}
   focusable="false"
-  hidden={hidden || undefined}
   fill={filled ? 'currentColor' : 'none'}
   stroke={filled ? 'none' : 'currentColor'}
   stroke-width={filled ? undefined : strokeWidth}
