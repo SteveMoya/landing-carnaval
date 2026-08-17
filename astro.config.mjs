@@ -10,6 +10,11 @@ export default defineConfig({
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      // Los scripts pequeños (<4KB) se inlinean por defecto y la CSP 'self' los
+      // bloquea → contenido invisible. Forzamos scripts externos siempre.
+      assetsInlineLimit: 0,
+    },
   },
   security: {
     checkOrigin: true,
