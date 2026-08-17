@@ -25,12 +25,11 @@ export function initSound(): void {
     enabled = on;
     toggle.setAttribute('aria-pressed', String(on));
     toggle.classList.toggle('is-on', on);
-    const iconOn = toggle.querySelector('[data-icon="volume"]');
-    const iconOff = toggle.querySelector('[data-icon="volume-off"]');
-    if (iconOn && iconOff) {
-      iconOn.setAttribute('hidden', String(!on));
-      iconOff.setAttribute('hidden', String(on));
-    }
+    // Visibilidad de iconos controlada por JS (hidden attr) — robusto
+    const iconOn = toggle.querySelector<SVGElement>('.icon-volume');
+    const iconOff = toggle.querySelector<SVGElement>('.icon-volume-off');
+    iconOn?.toggleAttribute('hidden', !on);
+    iconOff?.toggleAttribute('hidden', on);
   };
 
   try {
