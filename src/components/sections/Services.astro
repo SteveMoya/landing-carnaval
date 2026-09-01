@@ -21,6 +21,25 @@ import Icon from '../ui/Icon.astro';
     </p>
   </div>
 
+  <figure
+    data-reveal
+    class="relative mb-14 max-w-md border-[3px] border-black bg-paper shadow-pink hover:-rotate-1"
+  >
+    <img
+      src="/gallery-festival.jpg"
+      alt="Confeti y celebración: la entrega de un proyecto que sí se celebró"
+      class="h-60 w-full object-cover"
+      loading="lazy"
+    />
+    <div aria-hidden="true" class="absolute inset-0 mix-blend-overlay bg-gradient-to-tr from-yellow/40 via-transparent to-pink/40"></div>
+    <figcaption class="border-t-[3px] border-black bg-yellow px-4 py-2 font-accent text-xs uppercase tracking-widest text-black">
+      Cada entrega, una fiesta 🎉
+    </figcaption>
+    <span class="absolute -right-4 -top-4 rotate-3 border-[3px] border-black bg-pink px-3 py-1 font-accent text-xs uppercase tracking-widest text-white shadow-black">
+      ✓ entregado
+    </span>
+  </figure>
+
   <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
     {
       services.map((service, index) => (
