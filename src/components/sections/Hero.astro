@@ -13,6 +13,16 @@ import Icon from '../ui/Icon.astro';
     aria-hidden="true"
   ></canvas>
 
+  <!-- Foto: confetti watercolor como textura de fondo -->
+  <img
+    src="/hero-confetti.jpg"
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-overlay"
+  />
+  <!-- Overlay colorido de la marca sobre la textura -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 mix-blend-multiply bg-gradient-to-b from-pink/30 via-purple/20 to-blue/30"></div>
+
   <!-- Brillo ambiental -->
   <div aria-hidden="true" class="pointer-events-none absolute inset-0">
     <div class="absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-pink/20 blur-[120px]"></div>
