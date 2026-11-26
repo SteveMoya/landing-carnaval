@@ -5,7 +5,7 @@
   "engines": {
     "node": ">=22.12.0"
   },
-  "packageManager": "pnpm@11.16.0",
+  "packageManager": "pnpm@12.23.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -14,18 +14,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/sitemap": "^3.7.6",
     "@fontsource-variable/space-grotesk": "^5.3.0",
     "@fontsource/anton": "^5.3.0",
     "@fontsource/bungee": "^5.3.0",
-    "astro": "^7.2.2",
-    "three": "^0.185.1"
+    "astro": "^7.4.13",
+    "three": "^0.187.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
-    "@tailwindcss/vite": "^4.3.3",
-    "@types/three": "^0.185.4",
-    "tailwindcss": "^4.3.3",
+    "@astrojs/check": "^0.9.12",
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/three": "^0.187.0",
+    "tailwindcss": "^4.3.5",
     "typescript": "^5.9.3"
   }
 }
